@@ -1,0 +1,34 @@
+{
+  "dockerComposeFile": ["docker-compose.yml"],
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "containerEnv": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // redis
+        "cweijan.vscode-redis-client",
+        // eslint
+        "dbaeumer.vscode-eslint",
+        // env
+        "dotenv.dotenv-vscode",
+        // git
+        "eamodio.gitlens",
+        // prettier
+        "esbenp.prettier-vscode",
+        // todo
+        "Gruntfuggly.todo-tree",
+        // MongoDB
+        "mongodb.mongodb-vscode",
+        // Thunder Client
+        "rangav.vscode-thunder-client",
+        // 大小写
+        "Vgbire.letter-transform",
+        // 中文符号
+        "wangzy.sneak-mark"
+      ],
+      "settings": {}
+    }
+  },
+  "postCreateCommand": "npm i -g pnpm && pnpm i"
+}
