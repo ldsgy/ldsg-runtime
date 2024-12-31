@@ -1,5 +1,5 @@
 # 设定构建阶段基础镜像
-FROM node:20.11.0-bullseye
+FROM node:lts
 
 # 设定工作目录
 WORKDIR /app
