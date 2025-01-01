@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import fs from 'fs-extra';
 import path from 'node:path';
 import pm2 from 'pm2';
-import { swimlaneProcessReadyEmitter } from 'src/utils/event-emitter.js';
+import { swimlaneProcessReadyEmitter } from '../../event-emitter.js';
 
 interface StartSwimlaneParams {
   name: string;
