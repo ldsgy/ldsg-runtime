@@ -45,10 +45,7 @@ export const getSwimlaneInfo: GetSwimlaneInfo = async (params) => {
     const newSwimlanePort = await getPort();
 
     if (!lgsgAppDataUrl) {
-      res.json({
-        ready: 'ok',
-        lgsgAppDataUrlStatus: 'none',
-      });
+      throw new Error('lgsg app data url is required');
     }
 
     swimlaneInfo = {
