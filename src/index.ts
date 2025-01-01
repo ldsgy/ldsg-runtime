@@ -1,3 +1,4 @@
+import cors from 'cors';
 import type { Request, Response } from 'express';
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
@@ -6,9 +7,11 @@ import { getSwimlaneInfo, initProcessManager } from './utils/index.js';
 const runtimeRootPath = process.cwd();
 
 const main = async () => {
+  await initProcessManager();
+
   const app = express();
 
-  await initProcessManager();
+  app.use(cors());
 
   app.use(async (req, res, next) => {
     try {
