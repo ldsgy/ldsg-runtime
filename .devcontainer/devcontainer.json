@@ -2,7 +2,9 @@
   "dockerComposeFile": ["docker-compose.yml"],
   "service": "app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  "containerEnv": {},
+  "containerEnv": {
+    "VERSION": "1.0.0-dev"
+  },
   "customizations": {
     "vscode": {
       "extensions": [

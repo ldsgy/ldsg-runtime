@@ -5,23 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "开发热重载",
+      "name": "develop",
       "request": "launch",
-      "runtimeArgs": ["dev:hot"],
-      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "develop"],
+      "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
       "type": "node"
-    },
-    {
-      "name": "MOCK 开发热重载",
-      "request": "launch",
-      "runtimeArgs": ["dev:hot"],
-      "runtimeExecutable": "pnpm",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "node",
-      "env": {
-        "FETCH_SERVICE_RECORDS_MOCK": "1"
-      }
     }
   ]
 }
