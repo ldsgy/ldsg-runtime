@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import getPort from 'get-port';
-import { DEFAULT_SWIMLANE, swimlaneMap } from 'src/constants.js';
+import { DEFAULT_SWIMLANE } from '../constants.js';
 import { prepareSwimlane } from './prepare-swimlane/index.js';
+import { swimlaneMap } from './swimlane-map.js';
 
 interface SwimlaneInfo {
   port: number;

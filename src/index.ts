@@ -2,9 +2,10 @@ import cors from 'cors';
 import type { Request, Response } from 'express';
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { RUNTIME_SWIMLANE, swimlaneMap } from './constants.js';
+import { RUNTIME_SWIMLANE } from './constants.js';
 import { getSwimlaneInfo } from './utils/get-swimlane-info.js';
 import { initProcessManager } from './utils/init-process-manager.js';
+import { swimlaneMap } from './utils/swimlane-map.js';
 
 const runtimeRootPath = process.cwd();
 
