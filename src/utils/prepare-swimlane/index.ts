@@ -93,9 +93,24 @@ export const prepareSwimlane = async (params: PrepareSwimlaneParams) => {
 
       await generateByAppData({ appData, outputPath: currentSwimlaneRootPath });
 
-      shell
-        .cd(currentSwimlaneRootPath)
-        .exec('pnpm i && pnpm i --workspace-root ./handlers/* && pnpm build');
+      await new Promise<void>((resolve, reject) => {
+        const child = shell
+          .cd(currentSwimlaneRootPath)
+          .exec(
+            'pnpm i && pnpm i --workspace-root ./handlers/* && pnpm build',
+            {
+              async: true,
+            },
+          );
+
+        child.stdout.on('data', (data) => {
+          resolve(data);
+        });
+
+        child.stdout.on('error', (error) => {
+          reject(error);
+        });
+      });
 
       await startSwimlane({
         name: swimlaneName,

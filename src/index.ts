@@ -16,13 +16,18 @@ const main = async () => {
   app.use(cors());
 
   app.use(async (req, res, next) => {
+    const runtime = {
+      status: 'ok',
+      version: process.env.VERSION,
+    };
+
     try {
       const swimlaneName = req.get('X-Swimlane');
 
       if (swimlaneName === RUNTIME_SWIMLANE) {
         res.json({
-          ready: 'ok',
-          swimlaneMap,
+          runtime,
+          swimlanes: Object.fromEntries(swimlaneMap),
         });
       } else {
         const swimlaneInfo = await getSwimlaneInfo({
@@ -45,7 +50,7 @@ const main = async () => {
       }
     } catch (error) {
       res.json({
-        ready: 'ok',
+        runtime,
         lgsgAppDataUrlStatus: 'fail',
       });
     }
