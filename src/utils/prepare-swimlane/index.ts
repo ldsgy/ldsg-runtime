@@ -103,7 +103,7 @@ export const prepareSwimlane = async (params: PrepareSwimlaneParams) => {
             },
           );
 
-        child.stdout.on('data', (data) => {
+        child.stdout.on('end', (data) => {
           resolve(data);
         });
 
@@ -247,13 +247,26 @@ export const prepareSwimlane = async (params: PrepareSwimlaneParams) => {
 
           // rebuild
           if (diffHandlerIds.length) {
-            shell
-              .cd(currentSwimlaneRootPath)
-              .exec(
-                `pnpm ${diffHandlerIds
-                  .map((value) => `--filter ${value}`)
-                  .join(' ')} build`,
-              );
+            await new Promise<void>((resolve, reject) => {
+              const child = shell
+                .cd(currentSwimlaneRootPath)
+                .exec(
+                  `pnpm ${diffHandlerIds
+                    .map((value) => `--filter ${value}`)
+                    .join(' ')} build`,
+                  {
+                    async: true,
+                  },
+                );
+
+              child.stdout.on('end', (data) => {
+                resolve(data);
+              });
+
+              child.stdout.on('error', (error) => {
+                reject(error);
+              });
+            });
           }
         }
 
