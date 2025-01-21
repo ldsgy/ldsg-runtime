@@ -1,15 +1,12 @@
 import { Request, Response } from 'express';
 import getPort from 'get-port';
+import { DEFAULT_SWIMLANE, swimlaneMap } from 'src/constants.js';
 import { prepareSwimlane } from './prepare-swimlane/index.js';
-
-const DEFAULT_SWIMLANE = 'main';
 
 interface SwimlaneInfo {
   port: number;
   lgsgAppDataUrl: string;
 }
-
-const swimlaneMap = new Map<string, SwimlaneInfo>();
 
 interface GetSwimlaneInfoParams {
   runtimeRootPath: string;

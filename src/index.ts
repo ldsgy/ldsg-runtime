@@ -2,7 +2,9 @@ import cors from 'cors';
 import type { Request, Response } from 'express';
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { getSwimlaneInfo, initProcessManager } from './utils/index.js';
+import { RUNTIME_SWIMLANE, swimlaneMap } from './constants.js';
+import { getSwimlaneInfo } from './utils/get-swimlane-info.js';
+import { initProcessManager } from './utils/init-process-manager.js';
 
 const runtimeRootPath = process.cwd();
 
@@ -15,23 +17,32 @@ const main = async () => {
 
   app.use(async (req, res, next) => {
     try {
-      const swimlaneInfo = await getSwimlaneInfo({
-        runtimeRootPath,
-        req,
-        res,
-      });
+      const swimlaneName = req.get('X-Swimlane');
 
-      const { port } = swimlaneInfo;
+      if (swimlaneName === RUNTIME_SWIMLANE) {
+        res.json({
+          ready: 'ok',
+          swimlaneMap,
+        });
+      } else {
+        const swimlaneInfo = await getSwimlaneInfo({
+          runtimeRootPath,
+          req,
+          res,
+        });
 
-      const proxyMiddleware = createProxyMiddleware<Request, Response>({
-        target: {
-          host: '127.0.0.1',
-          port,
-        },
-        changeOrigin: false,
-      });
+        const { port } = swimlaneInfo;
 
-      proxyMiddleware(req, res, next);
+        const proxyMiddleware = createProxyMiddleware<Request, Response>({
+          target: {
+            host: '127.0.0.1',
+            port,
+          },
+          changeOrigin: false,
+        });
+
+        proxyMiddleware(req, res, next);
+      }
     } catch (error) {
       res.json({
         ready: 'ok',

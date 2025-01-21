@@ -37,5 +37,5 @@
     "ghcr.io/devcontainers-extra/features/pnpm:2": {},
     "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {}
   },
-  "postCreateCommand": "npm i -g pnpm && pnpm i"
+  "postCreateCommand": "pnpm i"
 }
