@@ -3,7 +3,8 @@
   "service": "app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "containerEnv": {
-    "VERSION": "1.0.0-dev"
+    "VERSION": "1.0.0-dev",
+    "PNPM_HOME": "/workspaces/${localWorkspaceFolderBasename}/data/pnpm-home"
   },
   "customizations": {
     "vscode": {
