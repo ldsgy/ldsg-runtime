@@ -45,6 +45,7 @@ export const prepareSwimlane = async (params: PrepareSwimlaneParams) => {
 
   const currentSwimlaneRootPath = path.join(
     runtimeRootPath,
+    'data',
     'swimlanes',
     swimlaneName,
   );
