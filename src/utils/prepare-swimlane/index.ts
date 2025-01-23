@@ -37,7 +37,11 @@ export const prepareSwimlane = async (params: PrepareSwimlaneParams) => {
   const { runtimeRootPath, swimlaneName, port, lgsgAppDataUrl, reload } =
     params;
 
-  const extraAppDataPath = path.join(runtimeRootPath, 'data', 'template.json');
+  const extraAppDataPath = path.join(
+    runtimeRootPath,
+    'template',
+    'template.json',
+  );
 
   const currentSwimlaneRootPath = path.join(
     runtimeRootPath,
@@ -219,7 +223,7 @@ export const prepareSwimlane = async (params: PrepareSwimlaneParams) => {
               );
 
               const templateJson = await fs.readJson(
-                path.join(currentSwimlaneRootPath, 'data', 'template.json'),
+                path.join(runtimeRootPath, 'template', 'template.json'),
               );
 
               const { reuseMainAppDependencies } = templateJson;
